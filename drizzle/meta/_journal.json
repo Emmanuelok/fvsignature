@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790038969106,
+      "tag": "0000_lyrical_the_hand",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790041276155,
+      "tag": "0001_acoustic_jamie_braddock",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790082035284,
+      "tag": "0002_handy_black_bolt",
+      "breakpoints": true
+    }
+  ]
+}

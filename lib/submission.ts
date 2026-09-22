@@ -1,0 +1,2 @@
+export async function readSubmission(request:Request,maxLength=12000){const raw=await request.text();if(raw.length>maxLength)throw new Error('Submission too large');const form=!(request.headers.get('content-type')||'').includes('application/json');const body=form?Object.fromEntries(new URLSearchParams(raw)):JSON.parse(raw);return {body,form};}
+export function hexId(){return Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join('');}
