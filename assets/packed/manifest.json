@@ -1,0 +1,35 @@
+[
+  {
+    "output": "public/photos/st-james-enhanced.png",
+    "sha256": "1ba54a5211eb958f0af21ae57e1a49f306e46fe5babfeddacc997d9aeadf9579",
+    "bytes": 2389594,
+    "parts": [
+      "assets/packed/venue/part-000.bin",
+      "assets/packed/venue/part-001.bin",
+      "assets/packed/venue/part-002.bin",
+      "assets/packed/venue/part-003.bin",
+      "assets/packed/venue/part-004.bin",
+      "assets/packed/venue/part-005.bin",
+      "assets/packed/venue/part-006.bin"
+    ]
+  },
+  {
+    "output": "public/Frederick-Veronica-Photographs.zip",
+    "sha256": "6820182c03dd3cf838d3bc17a14564812878d6c2c326f6905561a2dd72acb0c5",
+    "bytes": 4607453,
+    "parts": [
+      "assets/packed/collection/part-000.bin",
+      "assets/packed/collection/part-001.bin",
+      "assets/packed/collection/part-002.bin",
+      "assets/packed/collection/part-003.bin",
+      "assets/packed/collection/part-004.bin",
+      "assets/packed/collection/part-005.bin",
+      "assets/packed/collection/part-006.bin",
+      "assets/packed/collection/part-007.bin",
+      "assets/packed/collection/part-008.bin",
+      "assets/packed/collection/part-009.bin",
+      "assets/packed/collection/part-010.bin",
+      "assets/packed/collection/part-011.bin"
+    ]
+  }
+]

@@ -52,3 +52,7 @@ Organizer sessions use signed, expiring, HttpOnly cookies. Password checks use s
 `migrations/001_initial.sql` defines the PostgreSQL tables used on Vercel. The `drizzle/` directory preserves the historical SQLite migrations from the original website; do not run those against PostgreSQL. Existing hosting data must be migrated privately, not committed to this public repository.
 
 The enhanced church photo is based on the supplied photograph. Small details reconstructed from its low-resolution source may differ from the original.
+
+## Large assets
+
+The venue PNG and collection ZIP are stored byte-for-byte in `assets/packed/` to keep individual repository uploads small. `pnpm dev` and `pnpm build` reconstruct the original public files automatically and verify their SHA-256 checksums. No image quality is lost. Run `pnpm assets:prepare` if you need those two files before building.

@@ -47,3 +47,7 @@ next-env.d.ts
 
 *.tsbuildinfo
 !.env.example
+
+# Exact originals are reconstructed from verified repository parts at build time.
+/public/photos/st-james-enhanced.png
+/public/Frederick-Veronica-Photographs.zip
