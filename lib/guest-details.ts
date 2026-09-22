@@ -1,7 +1,7 @@
 export const guestDetails = {
   rsvpDeadline: '2026-10-05',
   dressCode: "Dress for a church celebration. If you'd like to match us, our colours are emerald green, terracotta and sand.",
-  afterCeremony: 'There will be no reception. We’ll share pastries after the ceremony.',
+  afterCeremony: 'No formal reception — just a joyful service, followed by a small gift of thanks for everyone who comes. Please stay and say hello before you go.',
   children: 'If you’re bringing little ones, include them in your RSVP so we can plan seating and welcome them well.',
   accessibility: 'St. James welcomes people of all abilities. Share any access needs when you RSVP, or mention them to Ibrahim or Gloria, and we’ll make arrangements with the church.',
   parking: 'There is plenty of parking on the church premises.',

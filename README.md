@@ -13,7 +13,7 @@ St. James United Church, 330 Elizabeth Ave, St. John's, NL A1B 1T9.
 - Four curated portraits, one from each similar pair, in an editorial gallery with cinematic transitions, a full-screen slideshow, favourites, and individual or collection downloads.
 - Private RSVP storage with party size, children, dietary requirements, and access needs.
 - Private guestbook and a protected organizer workspace at `/manage`, including guest search, attendance corrections, CSV export, and event editing.
-- Confirmed guest guidance, October 5 RSVP deadline, pastries after the ceremony, dress colours, parking, and contact links.
+- Confirmed guest guidance, October 5 RSVP deadline, a small gift of thanks after the service, dress colours, parking, and contact links.
 
 ## Deploy from GitHub to Vercel
 

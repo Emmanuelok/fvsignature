@@ -169,7 +169,7 @@ export default function EditorialGallery({ initialCollection = 'All portraits' }
   async function share() {
     const url = `${window.location.origin}/gallery`;
     try {
-      if (navigator.share) await navigator.share({ title: 'Frederick & Veronica — The Photographs', text: 'A lifetime, in frames. The photographs of Frederick and Veronica.', url });
+      if (navigator.share) await navigator.share({ title: 'Frederick & Veronica — The Photographs', text: 'Our love, in moments. The photographs of Frederick and Veronica.', url });
       else { await navigator.clipboard.writeText(url); toast.success('Gallery link copied'); }
     } catch (error) {
       if ((error as Error).name !== 'AbortError') toast.error('You can share this gallery by copying its address from your browser.');
@@ -180,7 +180,7 @@ export default function EditorialGallery({ initialCollection = 'All portraits' }
     <section className="album-introduction" aria-labelledby="album-title">
       <div className="album-overline"><span>FREDERICK & VERONICA</span><span>THE PHOTOGRAPHS — VOL. 01</span></div>
       <div className="album-intro-main">
-        <h1 id="album-title">A lifetime,<br /><i>in frames.</i><span className="album-title-star" aria-hidden="true">✳</span></h1>
+        <h1 id="album-title">Our love,<br /><i>in moments.</i><span className="album-title-star" aria-hidden="true">✳</span></h1>
         <div className="album-intro-aside"><p>The little glances.<br />The beautiful in-between.<br />Our favourite kind of forever.</p><button className="album-play" onClick={event => open(event, 0, true, galleryPhotos)}><span><Play size={19} fill="currentColor" /></span><span>Play the collection<small>Four moments. One love.</small></span></button></div>
       </div>
       <div className="album-intro-bottom"><span>A COLLECTION TO COME BACK TO.</span><a href="#the-portraits">Explore the photographs <ArrowDown size={18} /></a></div>
