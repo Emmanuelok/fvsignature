@@ -24,3 +24,5 @@ for (const asset of manifest) {
   await rename(destination + '.tmp', destination);
   console.log(`Prepared ${asset.output}`);
 }
+
+await import('./prepare-gallery.mjs');

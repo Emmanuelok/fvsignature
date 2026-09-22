@@ -8,9 +8,9 @@ St. James United Church, 330 Elizabeth Ave, St. John's, NL A1B 1T9.
 
 ## Included
 
-- A responsive photographic homepage with Home, Our Story, The Day, Venue, Gallery, Guestbook, and RSVP sections.
+- A responsive photographic homepage with Home, Our Story, The Day, Venue, Guestbook, and RSVP sections, plus a separate gallery at `/gallery`.
 - Enhanced venue photograph, interactive map, directions, address copying, countdown, and calendar download.
-- Eight couple photographs, full-screen slideshow, favourites, individual downloads, and collection ZIP.
+- Four curated portraits, one from each similar pair, in an editorial gallery with cinematic transitions, a full-screen slideshow, favourites, and individual or collection downloads.
 - Private RSVP storage with party size, children, dietary requirements, and access needs.
 - Private guestbook and a protected organizer workspace at `/manage`, including guest search, attendance corrections, CSV export, and event editing.
 - Confirmed guest guidance, October 5 RSVP deadline, pastries after the ceremony, dress colours, parking, and contact links.
@@ -56,3 +56,5 @@ The enhanced church photo is based on the supplied photograph. Small details rec
 ## Large assets
 
 The venue PNG and collection ZIP are stored byte-for-byte in `assets/packed/` to keep individual repository uploads small. `pnpm dev` and `pnpm build` reconstruct the original public files automatically and verify their SHA-256 checksums. No image quality is lost. Run `pnpm assets:prepare` if you need those two files before building.
+
+The displayed gallery and its four-photo download share the selection in `lib/gallery-photos.json`. The build creates `public/Frederick-Veronica-Selected-Photographs.zip` from those original WebP files. The original eight photographs remain available as source assets.
