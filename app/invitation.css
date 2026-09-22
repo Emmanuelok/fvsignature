@@ -29,3 +29,10 @@
 @media(min-width:1650px){.celebration-venue{padding-inline:max(7vw,calc((100vw - 1460px)/2))}}
 @media(max-width:950px){.venue-photograph figcaption{padding:22px;gap:20px}.venue-photo-address{max-width:230px;font-size:13px}.celebration-venue{padding-inline:5vw}}
 @media(max-width:600px){.venue-photograph{margin-top:28px}.venue-photograph-frame{padding:5px}.venue-photograph figcaption{display:block;padding:20px}.venue-photo-caption>span{font-size:9px;letter-spacing:.13em}.venue-photo-caption strong{font-size:28px;margin-top:7px}.venue-photo-address{max-width:260px;text-align:left;font-size:13px;margin-top:10px}.home-venue .venue-composition{margin-top:35px}.celebration-venue{padding:42px 24px 47px}.celebration-venue>.text-link{font-size:14px}}
+
+/* Shared studio credit, with a comfortable touch target on every page. */
+.footer .footer-credit{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:0 6px;margin:22px 0 0;padding-top:14px;border-top:1px solid #ffffff25;color:#d5baaa;font:400 14px/1.6 var(--sans);letter-spacing:0}
+.footer .footer-credit a{display:inline-flex;align-items:center;min-height:44px;color:#fff4e5;text-decoration:underline;text-decoration-color:#c6a47f;text-underline-offset:5px;text-decoration-thickness:1px}
+.footer .footer-credit a:hover{text-decoration-thickness:2px}
+.footer .footer-credit a:focus-visible{outline:2px solid #fff4e5;outline-offset:5px;border-radius:2px}
+@media(max-width:600px){.footer .footer-credit{justify-content:flex-start;margin-top:21px;gap:0 6px}}
