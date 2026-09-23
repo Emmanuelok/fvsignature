@@ -11,7 +11,7 @@ St. James United Church, 330 Elizabeth Ave, St. John's, NL A1B 1T9.
 - A responsive photographic homepage with Home, Our Story, The Day, Venue, Guestbook, and RSVP sections, plus a separate gallery at `/gallery`.
 - Enhanced venue photograph, interactive map, directions, address copying, countdown, and calendar download.
 - Four curated portraits, one from each similar pair, in an editorial gallery with cinematic transitions, a full-screen slideshow, favourites, and individual or collection downloads.
-- Private RSVP storage with party size, children, dietary requirements, and access needs.
+- A mobile-friendly RSVP with review before submission, field-level validation, retry-safe private storage, party size, children, dietary requirements, and access needs.
 - Private guestbook and a protected organizer workspace at `/manage`, including guest search, attendance corrections, CSV export, and event editing.
 - Confirmed guest guidance, October 5 RSVP deadline, a small gift of thanks after the service, dress colours, parking, and contact links.
 
@@ -40,6 +40,24 @@ pnpm typecheck
 pnpm test
 pnpm build
 ```
+
+## See who has replied
+
+Open **https://fvsignature.com/manage** (or select **Organizer** in the footer) and enter the organizer password. The guest list shows responses newest first, attendance totals, children, contact details, other guest names, dietary requirements, access needs, and notes. Use **Refresh responses** to load new replies, search or filter attendance, and export all active responses as CSV. Expand a response to correct its attendance or party size, or archive a duplicate. Archived entries remain available in the archive filter.
+
+The guest receives an on-screen confirmation and a downloadable receipt only after the database confirms the save. Confirmation emails are not sent. A failed request preserves the guest's details while the page stays open; retrying the same submission cannot create another record. Changing or removing an existing response requires the organizer.
+
+If `/manage` says secure access has not been configured, the database and private login settings below still need to be installed. Publishing the form alone does not configure those services.
+
+## Check RSVP storage
+
+`GET /api/rsvp` is a no-cache availability check. It returns only `{"available":true}` when the expected RSVP columns can be queried, or HTTP 503 with `{"available":false}`. It never lists guests. Vercel runtime logs record `rsvp_storage_failed` with a safe category and a request ID, never guest details or database credentials.
+
+- `database_not_configured`: connect the project's Neon database and set `DATABASE_URL` or `POSTGRES_URL` for Production.
+- `table_missing` / `column_missing`: pull that environment privately, then run `pnpm db:migrate`. The additive upgrade preserves existing responses.
+- `database_authentication` / `database_unreachable` / `database_unavailable`: check the database connection and provider status privately.
+
+After configuring credentials, deploy again so the server functions receive the new environment. Verify an RSVP can be saved and is visible after signing into `/manage`; remove or archive only clearly identified test records. Automated tests exercise validation, persistence failures, and retry handling with a test database double, not the production database.
 
 ## Organizer credentials
 
