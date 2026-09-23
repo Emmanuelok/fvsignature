@@ -17,7 +17,7 @@ St. James United Church, 330 Elizabeth Ave, St. John's, NL A1B 1T9.
 
 ## Password-free organizer and RSVP backend
 
-The original wedding Site holds the existing database and supports ChatGPT organizer sign-in. The Vercel `/manage` link redirects there. Guest submissions have a separate activation switch that remains off until owner enrollment is complete and the backend's audience change is approved. Follow [the backend activation checklist](docs/backend-activation.md) before enabling it. The website continues to deploy from GitHub to Vercel.
+The original wedding Site holds the existing database and supports ChatGPT organizer sign-in. The Vercel `/manage` link redirects there. The owner is enrolled, one-time enrollment is disabled, and public guest submissions have been explicitly approved. Both backend switches are enabled in this source configuration: guest submissions use the original Site's public APIs, while organizer access remains restricted to the enrolled identity. See [the backend activation checklist](docs/backend-activation.md) for deployment and verification steps. The website continues to deploy from GitHub to Vercel.
 
 ## Legacy Vercel database deployment
 
@@ -51,15 +51,17 @@ pnpm build
 
 ## See who has replied
 
-Open **https://fvsignature.com/manage** (or select **Organizer** in the footer) to continue to the original wedding Site and sign in with ChatGPT. The owner must first complete the enrollment described in the activation checklist. The guest list shows responses newest first, attendance totals, children, contact details, other guest names, dietary requirements, access needs, and notes. Use **Refresh responses** to load new replies, search or filter attendance, and export all active responses as CSV. Expand a response to correct its attendance or party size, or archive a duplicate. Archived entries remain available in the archive filter.
+Open **https://fvsignature.com/manage** (or select **Organizer** in the footer) to continue to the original wedding Site and sign in with the enrolled owner's ChatGPT account. One-time enrollment is complete and disabled. The guest list shows responses newest first, attendance totals, children, contact details, other guest names, dietary requirements, access needs, and notes. Use **Refresh responses** to load new replies, search or filter attendance, and export all active responses as CSV. Expand a response to correct its attendance or party size, or archive a duplicate. Archived entries remain available in the archive filter.
 
 The guest receives an on-screen confirmation and a downloadable receipt only after the database confirms the save. Confirmation emails are not sent. A failed request preserves the guest's details while the page stays open; retrying the same submission cannot create another record. Changing or removing an existing response requires the organizer.
 
-Publishing the form alone does not activate storage. The organizer redirect and public guest API connection are controlled separately; see the activation checklist for their current settings.
+The organizer redirect and public guest API connection are controlled separately, and both are enabled in this source configuration. Production availability also depends on publishing the approved backend audience change and deploying this configuration; see the activation checklist.
 
 ## Check RSVP storage
 
-`GET /api/rsvp` is a no-cache availability check. It returns only `{"available":true}` when the expected RSVP columns can be queried, or HTTP 503 with `{"available":false}`. It never lists guests. Vercel runtime logs record `rsvp_storage_failed` with a safe category and a request ID, never guest details or database credentials.
+`GET /api/rsvp` is a no-cache availability check. It returns only `{"available":true}` when the expected RSVP columns can be queried, or HTTP 503 with `{"available":false}`. It never lists guests. With guest backend access enabled, the Vercel route checks the original Site's API and rejects sign-in redirects, HTML, timeouts, and invalid confirmations. Follow the activation checklist to check backend audience and protected organizer access.
+
+For the legacy Neon integration, Vercel runtime logs record `rsvp_storage_failed` with a safe category and a request ID, never guest details or database credentials:
 
 - `database_not_configured`: connect the project's Neon database and set `DATABASE_URL` or `POSTGRES_URL` for Production.
 - `table_missing` / `column_missing`: pull that environment privately, then run `pnpm db:migrate`. The additive upgrade preserves existing responses.
