@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
     "organizer:password": "node scripts/hash-organizer-password.mjs",
-    "test": "node --experimental-strip-types --test tests/organizer-auth.test.mjs && node --experimental-strip-types --conditions=react-server --test scripts/check-database.mjs",
+    "test": "node --experimental-strip-types --test tests/organizer-auth.test.mjs tests/rsvp.test.mjs && node --experimental-strip-types --conditions=react-server --test scripts/check-database.mjs",
     "assets:prepare": "node scripts/prepare-assets.mjs"
   },
   "dependencies": {

@@ -119,7 +119,7 @@ let cached: { url: string; client: NeonQueryFunction<false, true> } | undefined;
 
 export function getDatabase() {
   const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
-  if (!url) throw new Error('DATABASE_URL is required for guest response storage.');
+  if (!url) throw Object.assign(new Error('DATABASE_URL is required for guest response storage.'), {code: 'FV_DATABASE_MISSING'});
   if (!cached || cached.url !== url) cached = { url, client: neon(url, { fullResults: true }) };
   const client = cached.client;
   return { prepare: (query: string) => new PreparedStatement(client, query) };
