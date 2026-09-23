@@ -1,6 +1,6 @@
 # Frederick & Veronica
 
-A complete wedding website for **Frederick Amokohene and Veronica Owusu**, built with Next.js, React, Tailwind CSS, and PostgreSQL on Neon.
+A complete wedding website for **Frederick Amokohene and Veronica Owusu**, built with Next.js, React, and Tailwind CSS.
 
 **Saturday, October 10, 2026 · 12:00 noon (America/St_Johns)**
 
@@ -15,7 +15,15 @@ St. James United Church, 330 Elizabeth Ave, St. John's, NL A1B 1T9.
 - Private guestbook and a protected organizer workspace at `/manage`, including guest search, attendance corrections, CSV export, and event editing.
 - Confirmed guest guidance, October 5 RSVP deadline, a small gift of thanks after the service, dress colours, parking, and contact links.
 
-## Deploy from GitHub to Vercel
+## Password-free organizer and RSVP backend
+
+The original wedding Site holds the existing database and supports ChatGPT organizer sign-in. The Vercel `/manage` link redirects there. Guest submissions have a separate activation switch that remains off until owner enrollment is complete and the backend's audience change is approved. Follow [the backend activation checklist](docs/backend-activation.md) before enabling it. The website continues to deploy from GitHub to Vercel.
+
+## Legacy Vercel database deployment
+
+The direct Neon integration is retained for installations that use Vercel-managed database credentials instead of the original wedding backend:
+
+Set both switches in `lib/backend-config.ts` to `false` when using this legacy integration.
 
 1. Import `Emmanuelok/fvsignature` into Vercel. Select **Next.js**, repository root, and **Node.js 22.x**. The production branch is `main`.
 2. Connect a dedicated **Neon PostgreSQL** database from Vercel's Storage/Marketplace. The application accepts `DATABASE_URL` or `POSTGRES_URL`. Keep preview data in a separate database/branch from production.
@@ -43,11 +51,11 @@ pnpm build
 
 ## See who has replied
 
-Open **https://fvsignature.com/manage** (or select **Organizer** in the footer) and enter the organizer password. The guest list shows responses newest first, attendance totals, children, contact details, other guest names, dietary requirements, access needs, and notes. Use **Refresh responses** to load new replies, search or filter attendance, and export all active responses as CSV. Expand a response to correct its attendance or party size, or archive a duplicate. Archived entries remain available in the archive filter.
+Open **https://fvsignature.com/manage** (or select **Organizer** in the footer) to continue to the original wedding Site and sign in with ChatGPT. The owner must first complete the enrollment described in the activation checklist. The guest list shows responses newest first, attendance totals, children, contact details, other guest names, dietary requirements, access needs, and notes. Use **Refresh responses** to load new replies, search or filter attendance, and export all active responses as CSV. Expand a response to correct its attendance or party size, or archive a duplicate. Archived entries remain available in the archive filter.
 
 The guest receives an on-screen confirmation and a downloadable receipt only after the database confirms the save. Confirmation emails are not sent. A failed request preserves the guest's details while the page stays open; retrying the same submission cannot create another record. Changing or removing an existing response requires the organizer.
 
-If `/manage` says secure access has not been configured, the database and private login settings below still need to be installed. Publishing the form alone does not configure those services.
+Publishing the form alone does not activate storage. The organizer redirect and public guest API connection are controlled separately; see the activation checklist for their current settings.
 
 ## Check RSVP storage
 
@@ -59,7 +67,7 @@ If `/manage` says secure access has not been configured, the database and privat
 
 After configuring credentials, deploy again so the server functions receive the new environment. Verify an RSVP can be saved and is visible after signing into `/manage`; remove or archive only clearly identified test records. Automated tests exercise validation, persistence failures, and retry handling with a test database double, not the production database.
 
-## Organizer credentials
+## Legacy organizer credentials
 
 Run `pnpm organizer:password` in a private terminal and follow the hidden password prompt. Save its generated hash as `ORGANIZER_PASSWORD_HASH` in Vercel. Generate a separate session secret with `openssl rand -hex 32` and save it as `SESSION_SECRET`.
 

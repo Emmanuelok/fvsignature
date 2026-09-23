@@ -3,6 +3,9 @@ import {getWeddingEvent} from '@/lib/event-server';
 import {getDatabase} from '@/db';
 import {Organizer} from './workspace';
 import {OrganizerLogin} from './login';
+import {redirect} from 'next/navigation';
+import {WEDDING_ORGANIZER_BACKEND_ENABLED} from '@/lib/backend-config';
+import {weddingOrganizerUrl} from '@/lib/public-backend';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -16,6 +19,7 @@ const errors: Record<string, string> = {
 };
 
 export default async function Manage({searchParams}: {searchParams: Promise<{error?: string}>}) {
+  if (WEDDING_ORGANIZER_BACKEND_ENABLED) redirect(weddingOrganizerUrl);
   if (!await isOrganizer()) {
     const params = await searchParams;
     return <main className="organizer-lock"><a href="/" className="monogram">F&V</a><h1>Wedding<br/><i>organizer.</i></h1><p>This page is reserved for the website organizer. Guest responses and messages are private.</p>{organizerEnabled() ? <OrganizerLogin initialError={typeof params.error === 'string' && Object.hasOwn(errors, params.error) ? errors[params.error] : ''}/> : <p>Organizer sign-in is not available yet. The website administrator needs to finish setting up secure access.</p>}<a className="text-link" href="/">Return to the wedding</a></main>;

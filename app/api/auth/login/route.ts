@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import {allowOrganizerLogin, organizerEnabled, ORGANIZER_COOKIE, organizerCookieOptions} from '@/lib/organizer';
 import {checkOrganizerPassword, createOrganizerSession, organizerConfig, sameOrigin} from '@/lib/organizer-security';
+import {WEDDING_ORGANIZER_BACKEND_ENABLED} from '@/lib/backend-config';
 
 export const runtime = 'nodejs';
 const messages = {
@@ -42,6 +43,7 @@ async function readPassword(request: Request): Promise<string | null> {
 
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return failure(request, 'origin', 403);
+  if (WEDDING_ORGANIZER_BACKEND_ENABLED) return failure(request, 'unavailable', 503);
   const config = organizerConfig();
   if (!config || !organizerEnabled()) return failure(request, 'unavailable', 503);
   try {

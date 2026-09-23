@@ -3,7 +3,8 @@ import {isOrganizer} from '@/lib/organizer';
 import {sameOrigin} from '@/lib/organizer-security';
 import {defaultEvent} from '@/lib/event-types';
 import {readSubmission} from '@/lib/submission';
-export async function POST(request:Request){if(!await isOrganizer())return Response.json({error:'Organizer access required.'},{status:403});try{
+import {WEDDING_ORGANIZER_BACKEND_ENABLED} from '@/lib/backend-config';
+export async function POST(request:Request){if(WEDDING_ORGANIZER_BACKEND_ENABLED)return Response.json({error:'Please open the organizer workspace to manage responses.'},{status:403,headers:{'Cache-Control':'no-store'}});if(!await isOrganizer())return Response.json({error:'Organizer access required.'},{status:403});try{
  if(!sameOrigin(request))return Response.json({error:'Please use this website.'},{status:403});
  const {body:b,form}=await readSubmission(request,8000);if(!b||typeof b!=='object')return Response.json({error:'Invalid details.'},{status:400});
  if(b.action==='update_rsvp'){

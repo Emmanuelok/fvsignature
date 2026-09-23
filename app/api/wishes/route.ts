@@ -1,6 +1,12 @@
 import { getDatabase } from '@/db';
 import {readSubmission} from '@/lib/submission';
+import {WEDDING_GUEST_BACKEND_ENABLED} from '@/lib/backend-config';
+import {publicWeddingBackend} from '@/lib/public-backend';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 export async function POST(request: Request) {
+ if(WEDDING_GUEST_BACKEND_ENABLED)return publicWeddingBackend.submitWish(request);
  try {
   const origin=request.headers.get('origin');
   if(origin&&new URL(origin).host!==new URL(request.url).host)return Response.json({error:'Please send your message from this website.'},{status:403});
